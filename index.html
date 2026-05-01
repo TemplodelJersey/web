@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Templo del Jersey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* --- ANIMACIONES --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- ESTILOS GENERALES --- */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #b30000;
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            background-color: #800000;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        header img {
+            width: 110px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-bottom: 10px;
+        }
+
+        h1 { font-style: italic; text-transform: uppercase; margin: 0; }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        /* --- TARJETAS --- */
+        .card {
+            background: white;
+            color: black;
+            width: 250px;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .card:hover { transform: translateY(-5px); }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .card h3 { font-size: 1rem; margin: 10px 0; }
+        .card p { font-weight: bold; color: #b30000; font-size: 1.1rem; }
+
+        button {
+            background: #b30000;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover { background: #333; }
+
+        /* --- SECCIÓN CARRITO --- */
+        #carrito-section {
+            background: #222;
+            padding: 40px 20px;
+            margin-top: 20px;
+            border-top: 4px solid #fff;
+        }
+
+        #lista-carrito {
+            padding: 0;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .item-carrito {
+            background: white;
+            color: black;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .btn-eliminar {
+            background: #ff0000;
+            width: auto;
+            padding: 5px 10px;
+        }
+
+        /* --- TICKET ESTILO VENTA --- */
+        #pago-ticket {
+            display: none;
+            background: white;
+            color: #333;
+            padding: 25px;
+            margin: 30px auto;
+            width: 90%;
+            max-width: 380px;
+            border-radius: 2px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            text-align: left;
+            border-top: 8px dashed #b30000; /* Estilo papel */
+        }
+
+        .ticket-header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        .ticket-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dotted #ccc; }
+        .ticket-total { font-size: 1.5rem; font-weight: bold; text-align: center; margin: 15px 0; border-top: 2px solid #333; padding-top: 10px; }
+        
+        .bank-box { background: #f4f4f4; padding: 15px; border-radius: 5px; font-size: 0.9rem; margin: 15px 0; border-left: 4px solid #b30000; }
+
+        /* --- REDES SOCIALES --- */
+        footer {
+            background: #111;
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            background: white;
+            color: #b30000;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #b30000;
+            color: white;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="img/logo.jpg" alt="Logo">
+    <h1>El Templo del Jersey</h1>
+</header>
+
+<section class="container">
+    <div class="card"> 
+        <img src="img/Alemania-Local-2006.webp" alt="Alemania">
+        <h3>Alemania Local 2006</h3> <p>$600 MXN</p> <button onclick="agregar('Alemania Local 2006', 600)">Agregar</button>
+    </div>
+    
+    <div class="card">
+        <img src="img/Alemania-Local-2014.webp" alt="Alemania">
+        <h3>Alemania Local 2014</h3>
+        <p>$500 MXN</p> <button onclick="agregar('Alemania Local 2014', 500)">Agregar</button>
+    </div>
+    
+    <div class="card">
+        <img src="img/Alemania-Local-2026.webp" alt="Alemania">
+        <h3>Alemania Local 2026</h3>
+        <p>$500 MXN</p><button onclick="agregar('Alemania Local 2026', 500)">Agregar</button>
+    </div>
+    
+    <div class="card">
+        <img src="img/Alemania-Visitante-2010.webp" alt="Alemania">
+        <h3>Alemania Visitante 2010</h3>
+        <p>$550 MXN</p>
+        <button onclick="agregar('Alemania Visitante 2010', 550)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="img/Argentina-Local-2022.webp" alt="Argentina">
+        <h3>Argentina Local WC 2022</h3>
+        <p>$500 MXN</p>
+        <button onclick="agregar('Argentina Local WC 2022', 500)">Agregar</button>
+    </div>
+   
+    <div class="card">
+        <img src="img/Barcelona-Local-2010.webp" alt="Barcelona">
+        <h3>Barcelona Local 2010</h3>
+        <p>$600 MXN</p>
+        <button onclick="agregar('Barcelona Local 2010', 600)">Agregar</button>
+    </div>
+    
+    <div class="card">
+        <img src="img/Barcelona-Visitante-2025.webp" alt="Barcelona">
+        <h3>Barcelona Visitante 2025</h3>
+        <p>$650 MXN</p>
+        <button onclick="agregar('Barcelona Visitante 2025', 650)">Agregar</button>
+    </div>
+    
+    <div class="card">
+        <img src="img/Barcelona-x-Rels-B-2025.webp" alt="Barcelona">
+        <h3>Barcelona x Rels B 2025</h3>
+        <p>$700 MXN</p>
+        <button onclick="agregar('Barcelona x Rels B 2025', 700)">Agregar</button>
+    </div>
+
+    <div class="card">
+        <img src="img/Real-Madrid-Local-2025.webp" alt="Madrid">
+        <h3>Real Madrid Local 2025</h3>
+        <p>$600 MXN</p>
+        <button onclick="agregar('Real Madrid Local 2025', 600)">Agregar</button>
+    </div>
+    
+    <div class="card">
+        <img src="img/CD-Guadalajara-Local-2024.webp" alt="Chivas">
+        <h3>CD Guadalajara Local 2024</h3>
+        <p>$800 MXN</p><button onclick="agregar('CD Guadalajara Local 2024', 800)">Agregar</button>
+    </div>
+    
+    <div class="card">
+        <img src="img/CD-Guadalajara-Local-1990.webp" alt="Chivas">
+        <h3>CD Guadalajara Local 1990</h3>
+        <p>$600 MXN</p>
+        <button onclick="agregar('CD Guadalajara Local 1990', 600)">Agregar</button>
+    </div>
+   
+    <div class="card">
+        <img src="img/CD-Guadalajara-Local-2006.webp" alt="Chivas">
+        <h3>CD Guadalajara Local 2006</h3>
+        <p>$500 MXN</p>
+        <button onclick="agregar('CD Guadalajara Local 2006', 500)">Agregar</button>
+    </div>
+    
+    <div class="card">
+        <img src="img/CD-Guadalajara-Visitante-2006.webp" alt="Chivas">
+        <h3>CD Guadalajara Visitante 2006</h3>
+        <p>$700 MXN</p>
+        <button onclick="agregar('CD Guadalajara Visitante 2006', 700)">Agregar</button>
+    </div>
+    
+    <div class="card">
+        <img src="img/Manchester-United-Local-2008.webp" alt="ManU">
+        <h3>Manchester United 2008</h3>
+        <p>$700 MXN</p>
+        <button onclick="agregar('Manchester United 2008', 700)">Agregar</button>
+    </div>
+    
+    <div class="card">
+        <img src="img/Holanda-Local-2004.webp" alt="Holanda">
+        <h3>Holanda Local 2004</h3>
+        <p>$600 MXN</p>
+        <button onclick="agregar('Holanda Local 2004', 600)">Agregar</button>
+    </div>
+    
+    <div class="card">
+        <img src="img/Holanda-Visitante-2004.webp" alt="Holanda">
+        <h3>Holanda Visitante 2004</h3>
+        <p>$600 MXN</p><button onclick="agregar('Holanda Visitante 2004', 600)">Agregar</button>
+    </div>
+    
+    <div class="card">
+        <img src="img/Japon-Visitante-x-Bad-Bunny-1998.webp" alt="Japon">
+        <h3>Japón x Bad Bunny 1998</h3>
+        <p>$700 MXN</p>
+        <button onclick="agregar('Japon x Bad Bunny 1998', 700)">Agregar</button>
+    </div>
+</section>
+
+<section id="carrito-section">
+    <h2><i class="fas fa-shopping-cart"></i> Carrito de Compras</h2>
+    <ul id="lista-carrito">
+        </ul>
+    <h3>Total actual: $<span id="total-txt">0</span> MXN</h3>
+    <button style="max-width: 300px; background: #27ae60;" onclick="abrirTicket()">Proceder al Pago</button>
+</section>
+
+<div id="pago-ticket">
+    <div class="ticket-header">
+        <h2>RECIBO DE ORDEN</h2>
+        <p>El Templo del Jersey</p>
+    </div>
+    <div id="items-ticket"></div>
+    <div class="ticket-total">TOTAL: $<span id="total-pago">0</span></div>
+    
+    <div class="bank-box">
+        <p><strong>PAGO BBVA:</strong></p>
+        <p>Cuenta: 1234567890</p>
+        <p>CLABE: 012345678901234567</p>
+        <p>Beneficiario: El Templo del Jersey</p>
+    </div>
+    <button onclick="confirmar()">Confirmar Transferencia</button>
+    <button onclick="cerrarTicket()" style="background:#666; margin-top:5px;">Cerrar</button>
+</div>
+
+<footer>
+    <h3>SÍGUENOS EN NUESTRAS REDES</h3>
+    <div class="social-links">
+        <a href="https://www.instagram.com/el_templo_del_jersey" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+        <a href="https://www.tiktok.com/@el.templo.del.jer" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+        <a href="https://www.facebook.com/share/1JCbcG4wt8/" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+    </div>
+</footer>
+
+<script>
+let carrito = [];
+let total = 0;
+
+function agregar(nombre, precio) {
+    carrito.push({nombre, precio});
+    total += precio;
+    renderCarrito();
+}
+
+function eliminar(index) {
+    total -= carrito[index].precio;
+    carrito.splice(index, 1);
+    renderCarrito();
+}
+
+function renderCarrito() {
+    const lista = document.getElementById('lista-carrito');
+    lista.innerHTML = "";
+    carrito.forEach((p, i) => {
+        lista.innerHTML += `<li class="item-carrito">
+            <span>${p.nombre} - $${p.precio}</span>
+            <button class="btn-eliminar" onclick="eliminar(${i})">Eliminar</button>
+        </li>`;
+    });
+    document.getElementById('total-txt').innerText = total;
+}
+
+function abrirTicket() {
+    if(carrito.length === 0) return alert("Carrito vacío");
+    const container = document.getElementById('items-ticket');
+    container.innerHTML = "";
+    carrito.forEach(p => {
+        container.innerHTML += `<div class="ticket-row"><span>${p.nombre}</span><span>$${p.precio}</span></div>`;
+    });
+    document.getElementById('total-pago').innerText = total;
+    document.getElementById('pago-ticket').style.display = 'block';
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+function cerrarTicket() { document.getElementById('pago-ticket').style.display = 'none'; }
+
+function confirmar() {
+    alert("¡Pedido recibido! Envíanos tu comprobante por redes sociales.");
+    carrito = []; total = 0; renderCarrito(); cerrarTicket();
+}
+</script>
+
+</body>
+</html>
